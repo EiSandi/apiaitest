@@ -169,14 +169,13 @@ def processRequest(req):
 
 
 def makeWebhookResult(data):
-    # result = data.get('results')
-    # if result is None:
-    #     return {}
+    result = data.get('results')
+    if result is None:
+        return {}
    
     speech='2016 movie list:'
-    for result in data['results']:
-        speech  = speech+result['original_title'] 
-
+    for movies in result['results']:
+        speech  = speech+movies.get('original_title')
         print("Response:")
         print(speech)
 
