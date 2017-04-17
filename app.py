@@ -173,8 +173,8 @@ def makeWebhookResult(data):
     # if result is None:
     #     return {}
 
-    for original_title in data['results']:
-        speech = "Today movie is " + original_title 
+    for result in data['results']:
+        speech = "Today movie is " + result['original_title'] 
         print("Response:")
         print(speech)
 
