@@ -168,11 +168,7 @@ def processRequest(req):
     return res
 
 
-def makeWebhookResult(data):
-    # result = data.get('results')
-    # if result is None:
-    #     return {}
-   
+def makeWebhookResult(data):    
     speech= "Movies:"
     for movies in data['results']:
         speech  = speech + "," + str(movies.get('title'))
@@ -187,9 +183,6 @@ def makeWebhookResult(data):
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
-
-
-
 
 
 if __name__ == '__main__':
