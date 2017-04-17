@@ -29,7 +29,7 @@ def webhook():
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    # print(res)
+    print('final result---',res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -40,16 +40,20 @@ def processRequest(req):
         return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
     yql_query = makeYqlQuery(req)
+    print('yql_query',yql_query)
     if yql_query is None:
         return {}
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+    print('urlencode---',urlencode({'q': yql_query}))
     result = urlopen(yql_url).read()
     data = json.loads(result)
+    print('json.loads data',data)
     res = makeWebhookResult(data)
     return res
 
 
 def makeYqlQuery(req):
+
     result = req.get("result")
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
