@@ -175,7 +175,7 @@ def makeWebhookResult(data):
    
     speech= "Movies:"
     for movies in data['results']:
-        speech  = speech + "," + str(movies['title'])
+        speech  = speech + "," + str(movies.get('title'))
         print("Response:")
         print(speech)
 
