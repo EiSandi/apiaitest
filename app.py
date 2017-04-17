@@ -29,7 +29,8 @@ def webhook():
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    print('final result---',res)
+    print("final result---")
+    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -44,10 +45,12 @@ def processRequest(req):
     if yql_query is None:
         return {}
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    print('urlencode---',urlencode({'q': yql_query}))
+    print("urlencode---")
+    print(urlencode({'q': yql_query}))
     result = urlopen(yql_url).read()
     data = json.loads(result)
-    print('json.loads data',data)
+    print("json.loads data")
+    print(data)
     res = makeWebhookResult(data)
     return res
 
@@ -86,8 +89,7 @@ def makeWebhookResult(data):
     if condition is None:
         return {}
 
-    # print(json.dumps(item, indent=4))
-
+    # print(json.dumps(item, indent=4s
     speech = "Today in " + location.get('city') + ": " + condition.get('text') + \
              ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
 
