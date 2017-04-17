@@ -156,7 +156,7 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "movietest":
         return {}
-    baseurl = "https://api.themoviedb.org/3/movie/550?api_key=9b13737dd0119d542aabe1bf7bda84fc"
+    baseurl = "https://api.themoviedb.org/3/discover/movie?primary_release_year=2010&sort_by=vote_average.desc&api_key=9b13737dd0119d542aabe1bf7bda84fc&format=json"
    
     yql_url = baseurl + "&format=json"
     result = urlopen(yql_url).read()
@@ -169,20 +169,22 @@ def processRequest(req):
 
 
 def makeWebhookResult(data):
-    original_title = data.get('original_title')
-    if original_title is None:
-        return {}
-    speech = "Today movie is " + original_title 
-    print("Response:")
-    print(speech)
+    # result = data.get('results')
+    # if result is None:
+    #     return {}
 
-    return {
-        "speech": speech,
-        "displayText": speech,
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
-    }
+    for original_title in data['results']:
+        speech = "Today movie is " + original_title 
+        print("Response:")
+        print(speech)
+
+        return {
+            "speech": speech,
+            "displayText": speech,
+            # "data": data,
+            # "contextOut": [],
+            "source": "apiai-weather-webhook-sample"
+        }
 
 
 if __name__ == '__main__':
