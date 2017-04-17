@@ -172,19 +172,25 @@ def makeWebhookResult(data):
     # result = data.get('results')
     # if result is None:
     #     return {}
-
+   
+    speech='2010 movie list:'
     for result in data['results']:
-        speech = "Today movie is " + result['original_title'] 
+        speech  = speech+result['original_title'] 
+
         print("Response:")
         print(speech)
 
-        return {
-            "speech": speech,
-            "displayText": speech,
-            # "data": data,
-            # "contextOut": [],
-            "source": "apiai-weather-webhook-sample"
-        }
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+
+
+
 
 
 if __name__ == '__main__':
